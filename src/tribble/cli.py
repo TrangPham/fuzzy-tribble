@@ -67,5 +67,8 @@ def load(input_dir: str) -> None:
     raw_contracts = reader.read_dir(input_dir)
     contracts = tribble.transform.transform(raw_contracts)
 
+    print("Storing in db ...")
     loader.load_dataframe(raw_contracts, contract.RawContract)
     loader.load_dataframe(contracts, contract.Contract)
+    print("Finished.")
+
