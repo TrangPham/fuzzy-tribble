@@ -4,3 +4,5 @@
 .idea
 .mypy_cache
 env
+**/*.pyc
+**/__pycache__
