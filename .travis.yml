@@ -7,6 +7,8 @@ install:
   - docker build -t jasonmwhite/tribble .
 
 script:
+  - docker run jasonmwhite/tribble pylint --version
+  - docker run jasonmwhite/tribble python --version
   - docker run jasonmwhite/tribble script/run_tests.sh
   - docker run jasonmwhite/tribble pylint src tests
   - docker run jasonmwhite/tribble mypy src tests
