@@ -3,6 +3,8 @@ sudo: required
 services:
   - docker
 
+group: deprecated-2017Q4
+
 install:
   - docker pull yowct/fuzzy-tribble || true
   - docker build --cache-from yowct/fuzzy-tribble --tag yowct/fuzzy-tribble .
