@@ -6,11 +6,13 @@ services:
 install:
   - docker pull yowct/fuzzy-tribble || true
   - docker build --cache-from yowct/fuzzy-tribble --tag yowct/fuzzy-tribble .
+  - docker tag yowct/fuzzy-tribble:latest yowct/fuzzy-tribble:$TRAVIS_BRANCH
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"; docker push yowct/fuzzy-tribble:$TRAVIS_BRANCH
 
 script:
-  - docker run yowct/fuzzy-tribble script/run_tests.sh
-  - docker run yowct/fuzzy-tribble pylint src tests
-  - docker run yowct/fuzzy-tribble mypy src tests
+  - docker run yowct/fuzzy-tribble:$TRAVIS_BRANCH script/run_tests.sh
+  - docker run yowct/fuzzy-tribble:$TRAVIS_BRANCH pylint src tests
+  - docker run yowct/fuzzy-tribble:$TRAVIS_BRANCH mypy src tests
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
